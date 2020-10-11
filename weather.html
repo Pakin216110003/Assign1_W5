@@ -1,0 +1,52 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+<title>weather</title>
+</head>
+<body class="container">
+
+
+
+   
+            <H1>
+                London Weather
+            </H1>
+            <p> The temperature: <span id="weather"></span> &deg;</p>
+        
+
+
+
+
+<script>
+function getCityTemp(city) {
+    $.ajax({
+        url: "https://api.openweathermap.org/data/2.5/weather",
+        type: "GET",
+        dataType: "JSON",
+        timeout: 2000,
+        data: {
+            q: city,
+            appid: "3b0437dcda369ebcbd974811c2460197"
+        },
+        beforeSend: function(data) {
+
+        },
+        success: function(data) {
+            console.log(data.main.temp);
+            $('#weather').html(data.main.temp-273.15)
+        },
+        error: function(data, textStatus, errorThrown) {
+            console.log(textStatus);
+        }
+    });
+}
+
+getCityTemp("London");
+</script>
+</body>
+</html>
